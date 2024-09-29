@@ -1,0 +1,10 @@
+curl --location 'localhost:9090/sendMail' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "karan panchal",
+    "sendto": "icon2023test@gmail.com",
+    "type": "payment",
+    "event": "bgmi",
+    "link": "whatsapp.link"
+}'
+
