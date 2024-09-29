@@ -20,7 +20,7 @@ const allowlist = [process.env.CORS_URL_1, process.env.CORS_URL_2];
 //add pdf path
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const pdfPath = path.join(__dirname, "sample.pdf");
+const pdfPath = path.join(__dirname, "Sample.pdf");
 
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
@@ -60,7 +60,7 @@ app.post("/sendMail", (req, res) => {
     html: emailContent,
     attachments: [
       {
-        filename: "sample.pdf",
+        filename: "Sample.pdf",
         path: pdfPath, // Attach the PDF
         contentType: "application/pdf",
       },
