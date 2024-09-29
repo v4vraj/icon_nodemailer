@@ -4,6 +4,8 @@ import cors from "cors";
 import fs from "fs";
 import transporter from "./mailer/transporter.js";
 import { registrationConfirm } from "./data.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -14,6 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Allowlist of allowed origins
 const allowlist = [process.env.CORS_URL_1, process.env.CORS_URL_2];
+
+//add pdf path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const pdfPath = path.join(__dirname, "sample.pdf");
 
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
@@ -51,6 +58,13 @@ app.post("/sendMail", (req, res) => {
     // cc: process.env.EMAIL_CC,
     subject: `Registration Confirmation for ${event}`,
     html: emailContent,
+    attachments: [
+      {
+        filename: "sample.pdf",
+        path: pdfPath, // Attach the PDF
+        contentType: "application/pdf",
+      },
+    ],
   };
 
   // Sending the email
